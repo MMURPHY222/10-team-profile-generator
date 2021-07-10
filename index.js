@@ -9,17 +9,6 @@ const Intern = require("./lib/intern");
 
 let team = [];
 
-// console.log(Employee);
-// console.log(Manager);
-// console.log(Engineer);
-// console.log(Intern);
-
-// let Mark = new Employee("Mark", "34589", "Mark@email.com");
-
-// console.log(Mark);
-
-// console.log(Mark.getName());
-
 // array containing objects  of all manager questions
 let managerQuestions = [
     {
@@ -131,8 +120,7 @@ function managerQs() {
     .then((answers) => {
         let manager = new Manager(`${answers.manName}`, `${answers.manId}`, `${answers.manEmail}`, `${answers.manOffice}`);
         team.push(manager);
-        // console.log(team);
-        // console.log(answers);
+
         switch(answers.type) {
             case "Engineer":
                 engQs();
@@ -158,7 +146,7 @@ function engQs () {
     inquirer
     .prompt(engineerQuestions)
     .then((engAnswers) => {
-        // console.log(engAnswers);
+        
         let engineer = new Engineer(`${engAnswers.engName}`, `${engAnswers.engId}`, `${engAnswers.engEmail}`, `${engAnswers.engGitHub}`);
         team.push(engineer);
 
@@ -184,7 +172,7 @@ function intQs () {
     inquirer
     .prompt(internQuestions)
     .then((intAnswers) => {
-        // console.log(intAnswers)
+        
         let intern = new Intern(`${intAnswers.intName}`, `${intAnswers.intId}`, `${intAnswers.intEmail}`, `${intAnswers.intSchool}`);
         team.push(intern);
 
@@ -205,25 +193,19 @@ function intQs () {
     });
 }
 
-function makeHTML() {
+function makeHTML(team) {
     console.log("IM MAKING THE HTML");
-    console.log(team);
+    console.log("This logs the team array correctly " + team);
+
+    const HTMLPageContent = writeHTML(team);
+
+    fs.writeFile('index.html', HTMLPageContent, (err) =>
+            err ? console.log(err) : console.log('Successfully created index.html!')
+        );
 }
 
-// function makeManager(answers) {
-//     // console.log(answers);
-//     let manager = new Manager(`${answers.manName}`, `${answers.manId}`, `${answers.manEmail}`, `${answers.manOffice}`);
-    
-//     return manager;
-// }
-
-// function makeIntern(answers) {
-//     console.log(answers);
-// }
-
-// function makeEngineer(answers) {
-//     console.log(answers)
-// }
+const writeHTML = (team) =>
+    `this is it guys ${team}`;
 
 // calls manager questions on page load
 managerQs();
