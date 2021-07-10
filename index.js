@@ -7,6 +7,8 @@ const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 
+let team = [];
+
 // console.log(Employee);
 // console.log(Manager);
 // console.log(Engineer);
@@ -127,13 +129,28 @@ function managerQs() {
     inquirer
     .prompt(managerQuestions)
     .then((answers) => {
-        console.log(answers);
-        if(answers.type == "Engineer") {
-            engQs();
-        } else if (answers.type = "Intern") {
-            intQs();
+        let manager = new Manager(`${answers.manName}`, `${answers.manId}`, `${answers.manEmail}`, `${answers.manOffice}`);
+        team.push(manager);
+        // console.log(team);
+        // console.log(answers);
+        switch(answers.type) {
+            case "Engineer":
+                engQs();
+                break;
+            case "Intern":
+                intQs();
+                break;
+            case "I don't want to add any more team members":
+                console.log("Thank you we will now make your team");
+                makeHTML(team);
+                break;
+            default:
+                console.log("Something went wrong please start over");
         }
-    });
+
+        // makeManager(answers);
+    })
+
 }
 
 // runs based on choice, - uses inquirer to prompt engineer questions
@@ -141,11 +158,23 @@ function engQs () {
     inquirer
     .prompt(engineerQuestions)
     .then((engAnswers) => {
-        console.log(engAnswers);
-        if(engAnswers.engType == "Engineer") {
-            engQs();
-        } else if (engAnswers.engType = "Intern") {
-            intQs();
+        // console.log(engAnswers);
+        let engineer = new Engineer(`${engAnswers.engName}`, `${engAnswers.engId}`, `${engAnswers.engEmail}`, `${engAnswers.engGitHub}`);
+        team.push(engineer);
+
+        switch(engAnswers.engType) {
+            case "Engineer":
+                engQs();
+                break;
+            case "Intern":
+                intQs();
+                break;
+            case "I don't want to add any more team members":
+                console.log("Thank you we will now make your team");
+                makeHTML(team);
+                break;
+            default:
+                console.log("Something went wrong please start over");
         }
     });
 }
@@ -155,14 +184,46 @@ function intQs () {
     inquirer
     .prompt(internQuestions)
     .then((intAnswers) => {
-        console.log(intAnswers)
-        if(intAnswers.intType == "Engineer") {
-            engQs();
-        } else if (intAnswers.intType = "Intern") {
-            intQs();
+        // console.log(intAnswers)
+        let intern = new Intern(`${intAnswers.intName}`, `${intAnswers.intId}`, `${intAnswers.intEmail}`, `${intAnswers.intSchool}`);
+        team.push(intern);
+
+        switch(intAnswers.intType) {
+            case "Engineer":
+                engQs();
+                break;
+            case "Intern":
+                intQs();
+                break;
+            case "I don't want to add any more team members":
+                console.log("Thank you we will now make your team");
+                makeHTML(team);
+                break;
+            default:
+                console.log("Something went wrong please start over");
         }
     });
 }
+
+function makeHTML() {
+    console.log("IM MAKING THE HTML");
+    console.log(team);
+}
+
+// function makeManager(answers) {
+//     // console.log(answers);
+//     let manager = new Manager(`${answers.manName}`, `${answers.manId}`, `${answers.manEmail}`, `${answers.manOffice}`);
+    
+//     return manager;
+// }
+
+// function makeIntern(answers) {
+//     console.log(answers);
+// }
+
+// function makeEngineer(answers) {
+//     console.log(answers)
+// }
 
 // calls manager questions on page load
 managerQs();
