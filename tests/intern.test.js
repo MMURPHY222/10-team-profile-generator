@@ -1,6 +1,8 @@
+// requires file set to be tested
 const Intern = require("../lib/intern");
 
 describe("Intern test", () => {
+    // checks that getSchool returns the correct value
     it("should return correct school", () => {
         const int = new Intern("Mary", "6", "mm@yahoo.com", "Emory");
         const school = int.getSchool();

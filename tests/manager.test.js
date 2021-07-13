@@ -1,6 +1,8 @@
+// requires file set to be tested
 const Manager = require("../lib/manager");
 
 describe("manager test", () => {
+    // checks that getSchool returns the correct value
     it("should return correct role", () => {
         const mom = new Manager("Mom", "10", "mom@moms.com", "1");
         const job = mom.getRole();

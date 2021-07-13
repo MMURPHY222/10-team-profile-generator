@@ -1,7 +1,9 @@
+// requires file set to be tested
 const Engineer = require("../lib/engineer");
 
 describe("Engineer test", () => {
     it("should return correct gitHub", () => {
+        // checks that getGithub returns correct value
         const eng = new Engineer("Joe", "4", "JoeJoe@email.com", "JJJ789");
         const gitHub = eng.getGithub();
 
