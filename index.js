@@ -228,7 +228,7 @@ function makeHTML(team) {
     })
         const HTMLPageContent = writeHTML();
 
-    fs.writeFile('index.html', HTMLPageContent, (err) =>
+    fs.writeFile('./dist/index.html', HTMLPageContent, (err) =>
             err ? console.log(err) : console.log('Successfully created index.html!')
         );
     }
@@ -239,59 +239,44 @@ function makeHTML(team) {
 
 
 function makeManagerCard(manager){ 
-    return `<div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="..." alt="Card image cap">
-    <div class="card-body">
+    return `<div class="card my-style" style="width: 18rem;">
+    <div class="card-body bg-info text-light">
       <h5 class="card-title">${manager.name}</h5>
-      <p class="card-text">Manager</p>
+      <p class="card-text">☕Manager</p>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">ID: ${manager.id}</li>
-      <li class="list-group-item">Email: ${manager.email}</li>
+      <li class="list-group-item"><a href="mailto:${manager.email}">Email</a></li>
       <li class="list-group-item">Office number: ${manager.officeNumber}</li>
     </ul>
-    <div class="card-body">
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
   </div>`
 }
 
 function makeInternCard(intern) {
-    return `<div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="..." alt="Card image cap">
-    <div class="card-body">
+    return `<div class="card my-style" style="width: 18rem;">
+    <div class="card-body bg-info text-light">
       <h5 class="card-title">${intern.name}</h5>
-      <p class="card-text">Intern</p>
+      <p class="card-text">🎓Intern</p>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">ID: ${intern.id}</li>
-      <li class="list-group-item">Email: ${intern.email}</li>
-      <li class="list-group-item">Office number: ${intern.school}</li>
+      <li class="list-group-item"><a href="mailto:${intern.email}">Email</a></li>
+      <li class="list-group-item">School: ${intern.school}</li>
     </ul>
-    <div class="card-body">
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
   </div>`
 }
 
 function makeEngineerCard(engineer) {
-    return `<div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="..." alt="Card image cap">
-    <div class="card-body">
+    return `<div class="card my-style" style="width: 18rem;">
+    <div class="card-body bg-info text-light">
       <h5 class="card-title">${engineer.name}</h5>
-      <p class="card-text">Engineer</p>
+      <p class="card-text">👓Engineer</p>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">ID: ${engineer.id}</li>
-      <li class="list-group-item">Email: ${engineer.email}</li>
-      <li class="list-group-item">Office number: ${engineer.github}</li>
+      <li class="list-group-item"><a href="mailto:${engineer.email}">Email</a></li>
+      <li class="list-group-item"><a href="https://github.com/${engineer.github}">Github</a></li>
     </ul>
-    <div class="card-body">
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
   </div>`
 }
 
@@ -301,10 +286,19 @@ const writeHTML = () =>
     <head>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title></title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="style.css">
+      <title>Team Page</title>
     </head>
     <body>
+    <div class="jumbotron jumbotron-fluid bg-danger">
+    <div class="container">
+    <h1 class="display-4 text-light">My Team</h1>
+    </div>
+    </div>
+    <div class = "d-flex flex-row justify-content-around">
     ${bigString}
+    </div>
     <footer>
     </footer>
     </body>`;
