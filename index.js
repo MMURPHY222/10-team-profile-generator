@@ -8,6 +8,10 @@ const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 
 let team = [];
+let managerTeam = [];
+let internTeam = [];
+let engineerTeam = [];
+let bigString = "";
 
 // array containing objects  of all manager questions
 let managerQuestions = [
@@ -135,8 +139,7 @@ function managerQs() {
             default:
                 console.log("Something went wrong please start over");
         }
-
-        // makeManager(answers);
+        
     })
 
 }
@@ -164,6 +167,7 @@ function engQs () {
             default:
                 console.log("Something went wrong please start over");
         }
+
     });
 }
 
@@ -194,18 +198,121 @@ function intQs () {
 }
 
 function makeHTML(team) {
-    console.log("IM MAKING THE HTML");
-    console.log("This logs the team array correctly " + team);
 
-    const HTMLPageContent = writeHTML(team);
+    console.log(team);
+    // console.log("IM MAKING THE HTML");
+    // console.log(team[0]);
+
+    team.forEach(element => {
+        if(element.getRole() == "Manager") {
+            // makeManagerCard(element);
+            // managerTeam.push(element);
+            // console.log(makeManagerCard(element));
+            bigString += makeManagerCard(element);
+
+        } else if(element.getRole() == "Intern") {
+            // makeInternCard(element);
+            // internTeam.push(element);
+            // console.log(internTeam)
+            // console.log(makeInternCard(element));
+            bigString += makeInternCard(element);
+
+        } else if(element.getRole() == "Engineer") {
+            // makeEngineerCard(element);
+            // engineerTeam.push(element);
+            // console.log(engineerTeam);
+            // console.log(makeEngineerCard(element));
+            bigString += makeEngineerCard(element);
+
+        }
+    })
+        const HTMLPageContent = writeHTML();
 
     fs.writeFile('index.html', HTMLPageContent, (err) =>
             err ? console.log(err) : console.log('Successfully created index.html!')
         );
+    }
+
+    // console.log(managerTeam);
+    // });
+
+
+
+function makeManagerCard(manager){ 
+    return `<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">${manager.name}</h5>
+      <p class="card-text">Manager</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">ID: ${manager.id}</li>
+      <li class="list-group-item">Email: ${manager.email}</li>
+      <li class="list-group-item">Office number: ${manager.officeNumber}</li>
+    </ul>
+    <div class="card-body">
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div>
+  </div>`
 }
 
-const writeHTML = (team) =>
-    `this is it guys ${team}`;
+function makeInternCard(intern) {
+    return `<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">${intern.name}</h5>
+      <p class="card-text">Intern</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">ID: ${intern.id}</li>
+      <li class="list-group-item">Email: ${intern.email}</li>
+      <li class="list-group-item">Office number: ${intern.school}</li>
+    </ul>
+    <div class="card-body">
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div>
+  </div>`
+}
+
+function makeEngineerCard(engineer) {
+    return `<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">${engineer.name}</h5>
+      <p class="card-text">Engineer</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">ID: ${engineer.id}</li>
+      <li class="list-group-item">Email: ${engineer.email}</li>
+      <li class="list-group-item">Office number: ${engineer.github}</li>
+    </ul>
+    <div class="card-body">
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div>
+  </div>`
+}
+
+const writeHTML = () =>
+    `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title></title>
+    </head>
+    <body>
+    ${bigString}
+    <footer>
+    </footer>
+    </body>`;
+
+
+
+// const writeHTML = (team) => 
+//     `what is this ${team}`
 
 // calls manager questions on page load
 managerQs();
