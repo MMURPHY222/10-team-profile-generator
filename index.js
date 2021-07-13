@@ -8,9 +8,6 @@ const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 
 let team = [];
-let managerTeam = [];
-let internTeam = [];
-let engineerTeam = [];
 let bigString = "";
 
 // array containing objects  of all manager questions
@@ -19,6 +16,7 @@ let managerQuestions = [
         type: "input",
         message: "What is your manager's name?",
         name: "manName",
+
     },
 
     {
@@ -197,31 +195,21 @@ function intQs () {
     });
 }
 
+// function has a forEach for each object within the team array and puts the object into the make a card function
+// for its same role and adds it to an empty string
+// also contains fs write file which writes the HTML in the correct location
 function makeHTML(team) {
 
     console.log(team);
-    // console.log("IM MAKING THE HTML");
-    // console.log(team[0]);
 
     team.forEach(element => {
         if(element.getRole() == "Manager") {
-            // makeManagerCard(element);
-            // managerTeam.push(element);
-            // console.log(makeManagerCard(element));
             bigString += makeManagerCard(element);
 
         } else if(element.getRole() == "Intern") {
-            // makeInternCard(element);
-            // internTeam.push(element);
-            // console.log(internTeam)
-            // console.log(makeInternCard(element));
             bigString += makeInternCard(element);
 
         } else if(element.getRole() == "Engineer") {
-            // makeEngineerCard(element);
-            // engineerTeam.push(element);
-            // console.log(engineerTeam);
-            // console.log(makeEngineerCard(element));
             bigString += makeEngineerCard(element);
 
         }
@@ -233,11 +221,7 @@ function makeHTML(team) {
         );
     }
 
-    // console.log(managerTeam);
-    // });
-
-
-
+// text for manager card, bootstrap syntax, uses template literal and dot notation to grab information from object
 function makeManagerCard(manager){ 
     return `<div class="card my-style" style="width: 18rem;">
     <div class="card-body bg-info text-light">
@@ -252,6 +236,7 @@ function makeManagerCard(manager){
   </div>`
 }
 
+// text for intern card
 function makeInternCard(intern) {
     return `<div class="card my-style" style="width: 18rem;">
     <div class="card-body bg-info text-light">
@@ -266,6 +251,7 @@ function makeInternCard(intern) {
   </div>`
 }
 
+// text for engineer card
 function makeEngineerCard(engineer) {
     return `<div class="card my-style" style="width: 18rem;">
     <div class="card-body bg-info text-light">
@@ -280,6 +266,7 @@ function makeEngineerCard(engineer) {
   </div>`
 }
 
+// has the base HTML syntax and adds the string containing all the card syntax to the HTML 
 const writeHTML = () =>
     `<!DOCTYPE html>
     <html lang="en">
@@ -287,7 +274,6 @@ const writeHTML = () =>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-      <link rel="stylesheet" href="style.css">
       <title>Team Page</title>
     </head>
     <body>
@@ -303,10 +289,4 @@ const writeHTML = () =>
     </footer>
     </body>`;
 
-
-
-// const writeHTML = (team) => 
-//     `what is this ${team}`
-
-// calls manager questions on page load
 managerQs();
