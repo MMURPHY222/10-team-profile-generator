@@ -210,6 +210,8 @@ const writeHTML = () =>
     </footer>
     </body>`;
 ```
+
+Bootstrap was used and their classes were implemented in both the card text and the html text. This allowed for no separate style.css file to be needed. 
 ## Video Link
 https://drive.google.com/file/d/1nyYdJvguBRsth81equLONRJZ2OTGPGb7/view
 ## Screenshots
