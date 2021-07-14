@@ -200,8 +200,6 @@ function intQs () {
 // also contains fs write file which writes the HTML in the correct location
 function makeHTML(team) {
 
-    console.log(team);
-
     team.forEach(element => {
         if(element.getRole() == "Manager") {
             bigString += makeManagerCard(element);
